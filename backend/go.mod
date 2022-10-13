@@ -2,11 +2,7 @@ module mock
 
 go 1.19
 
-require (
-	github.com/gorilla/mux v1.8.0
-	github.com/rs/cors v1.8.2
-	golang.org/x/oauth2 v0.0.0-20220909003341-f21342109be1
-)
+require golang.org/x/oauth2 v0.0.0-20220909003341-f21342109be1
 
 require (
 	github.com/gin-contrib/sse v0.1.0 // indirect

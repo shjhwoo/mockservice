@@ -25,9 +25,9 @@ func callbackHandler(c *gin.Context) {
 	fmt.Println(req.URL, "토큰은 여기서 받아용")
 	//0.클라이언트 설정
 	con := oauth2.Config{
-		ClientID:     "vegas",
+		ClientID:     "hanchart",
 		ClientSecret: "foobar",
-		RedirectURL:  "http://localhost:3006/callback",
+		RedirectURL:  "http://localhost:4006/callback",
 		Scopes:       []string{"openid", "offline"},
 		Endpoint: oauth2.Endpoint{
 			TokenURL: "http://localhost:8080/api/oauth2/token",
@@ -61,7 +61,7 @@ func callbackHandler(c *gin.Context) {
 
 	//해당 토큰을 다시 IDP로 전송하여 사용자 정보를 받아온다.
 	var appClientInfo = clientcredentials.Config{
-		ClientID:     "vegas",
+		ClientID:     "hanchart",
 		ClientSecret: "foobar",
 		Scopes:       []string{"openid", "offline"},
 		TokenURL:     "http://localhost:8080/api/oauth2/token",
@@ -123,13 +123,13 @@ func callbackHandler(c *gin.Context) {
 	if err != nil {
 		panic(err)
 	}
- 
-	fmt.Println("베가스 리프레시토큰 확인",string(serviceRefreshToken[:]))
-	c.SetCookie("vegasRefreshToken", string(serviceRefreshToken[:]), 7*24*60*60, "/", "localhost",false, false)
+
+	fmt.Println("베가스 리프레시토큰 확인", string(serviceRefreshToken[:]))
+	c.SetCookie("hanchartRefreshToken", string(serviceRefreshToken[:]), 7*24*60*60, "/", "localhost", false, false)
 	//c.SetSameSite(http.SameSiteNoneMode)
 
 	c.JSON(http.StatusCreated, gin.H{
-		"userid": userinfo.Uid,
-		"accessToken":string(serviceAccessToken[:]),
+		"userid":      userinfo.Uid,
+		"accessToken": string(serviceAccessToken[:]),
 	})
 }

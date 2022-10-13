@@ -6,10 +6,9 @@ import (
 	"net/http"
 )
 
+var port = "5001"
 
-var port = "4000"
-
-func main () {
+func main() {
 	err := http.ListenAndServe(":"+port, application.SetupRouter())
 	if err != nil {
 		log.Fatal(err)
