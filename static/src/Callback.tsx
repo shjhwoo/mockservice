@@ -27,7 +27,7 @@ function Callback(props: Props) {
     if (authorizationCode) {
       axios
         .post(
-          "http://localhost:4000/callback",
+          "http://localhost:5001/callback",
           { authorizationCode },
           { headers: { withCredentials: true } }
         )
@@ -35,9 +35,11 @@ function Callback(props: Props) {
           const accessToken = res.data.accessToken;
           const refreshToken = document.cookie
             .split(" ")
-            .filter((cookie) => cookie.includes("vegas"))[0];
+            .filter((cookie) => cookie.includes("hanchart"))[0];
           console.log(accessToken, refreshToken);
           props.setToken({ accessToken, refreshToken });
+          localStorage.setItem("userid", res.data.userid);
+
         })
         .catch((err) => {
           console.error(err);

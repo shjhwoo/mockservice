@@ -27,7 +27,7 @@ class Api {
       if (response.status === 401) {
         //가지고 있는 리프레시 쿠키로 액세스 토큰 요청
         option.method = "POST";
-        option.url = "http://localhost:4000/refreshaccesstoken";
+        option.url = "http://localhost:5001/refreshaccesstoken";
         option.data = { accessToken: "accessToken string" };
         option.headers = { withCredentials: true };
         const refreshTokenResponse = await axios(option);
@@ -35,7 +35,7 @@ class Api {
         if (refreshTokenResponse.status === 401) {
           //리프레시 토큰마저도 무쓸모.. SSO가 있는지 확인하러 가야함
           option.method = "GET";
-          option.url = "http://localhost:4000/checksso";
+          option.url = "http://localhost:5001/checksso";
           option.data = null;
           const SSOresponse = await axios(option);
 
@@ -65,7 +65,7 @@ class Api {
       const { accessToken, refreshToken } = token;
       const option = {
         method: "POST",
-        url: "http://localhost:4000/checkservicetkn",
+        url: "http://localhost:5001/checkservicetkn",
         data: { accessToken, refreshToken },
         headers: { withCredentials: true }, //액세스 토큰과 리프레시 토큰 모두 한꺼번에 보내서 검증한다.
       };
